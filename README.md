@@ -1,3 +1,3 @@
-# PHP FPM Image with IonCube Loader
+# PHP FPM Image with IonCube Loader and Xdebug
 
-This image includes PHP 7 with FPM and the IonCube Loader.
+This image includes PHP 7 with FPM, the IonCube Loader and Xdebug.
