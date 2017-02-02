@@ -6,8 +6,10 @@ RUN apt-get update \
     && mkdir -p /usr/local/ioncube
 
 ADD ioncube_loader_lin_x86-64_7.0b8.so /usr/local/ioncube/ioncube_loader_lin_x86-64_7.0b8.so
-ADD php-ini-overrides.ini /etc/php/7.0/fpm/conf.d/00-php-ini-overrides.ini
-ADD php-ini-overrides.ini /etc/php/7.0/cli/conf.d/00-php-ini-overrides.ini
+ADD 00-ioncube.ini /etc/php/7.0/fpm/conf.d/00-ioncube.ini
+ADD 00-ioncube.ini /etc/php/7.0/cli/conf.d/00-ioncube.ini
+ADD php-ini-overrides.ini /etc/php/7.0/fpm/conf.d/80-php-ini-overrides.ini
+ADD php-ini-overrides.ini /etc/php/7.0/cli/conf.d/80-php-ini-overrides.ini
 
 ADD xdebug-2.4.1 /tmp/xdebug-2.4.1/
 RUN cd /tmp/xdebug-2.4.1 \
@@ -15,14 +17,5 @@ RUN cd /tmp/xdebug-2.4.1 \
     && ./configure \
     && make \
     && cp modules/xdebug.so /usr/lib/php/20151012
-
-RUN touch /etc/php/7.0/fpm/conf.d/xdebug.ini; \
-    echo xdebug.remote_enable=1 >> /etc/php/7.0/fpm/conf.d/xdebug.ini; \
-    echo xdebug.remote_autostart=0 >> /etc/php/7.0/fpm/conf.d/xdebug.ini; \
-    echo xdebug.remote_connephpct_back=1 >> /etc/php/7.0/fpm/conf.d/xdebug.ini; \
-    echo xdebug.remote_port=9000 >> /etc/php/7.0/fpm/conf.d/xdebug.ini; \
-    echo xdebug.remote_log=/tmp/php-xdebug.log >> /etc/php/7.0/fpm/conf.d/xdebug.ini; \
-    echo xdebug.show_local_vars=1 >> /etc/php/7.0/fpm/conf.d/xdebug.ini; \
-    echo xdebug.idekey=PHPSTORM >> /etc/php/7.0/fpm/conf.d/xdebug.ini;
 
 WORKDIR "/var/www/html"
